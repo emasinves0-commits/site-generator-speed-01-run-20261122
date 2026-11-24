@@ -118,3 +118,19 @@ About: homepage = bounty link, topic `makefun`.
 sets + oracle answers), `prof/` + `prof2/` (CPU profiles), `out/` / `scores/`
 (scorer runs), `fullrun/` (end-to-end driver run), `verify.py` (repo check).
 Regenerate with the kit's `draw.ts` + `program/scorer/main.ts` if lost.
+
+## Re-submit note (24 Nov 2026, ~06:00 UTC) — timing outage, code unchanged
+
+The v1 entry (submission 01a2065c, received 23 Nov 03:03:54 UTC) passed the
+gate (3/3 cases) but its dev-board `cpu_us` came back NULL, leaving it at
+rank ~8,200 below all 7,893 timed entries. Diagnosis (stream-parse of the
+full 8,443-entry board, 24 Nov ~05:45 UTC): the NULL timings cluster almost
+entirely in ONE 2-hour window — 280 nulls received 23 Nov 02:00–03:00 UTC and
+251 nulls 03:00–04:00 UTC (531 of 541 nulls); every other hour has 0–4. The
+platform's timing service was evidently down in that window; our entry was
+received inside it (03:03:54 UTC). This is a platform outage, not an entry
+defect — the code is unchanged in this re-submit. Purpose: obtain a real dev
+timing (expected ~300–500 ms on the sandbox by the local 200 ms benchmark)
+and a true dev rank. The final re-grades every entry fresh on the scored set,
+so this re-submit changes nothing about the final except the receipt time.
+Code identical to v1: solve.js untouched (same 34,519 bytes).
